@@ -4,6 +4,9 @@
 #include <iostream>
 
 template <typename T>
+std::ostream& operator << (std::ostream& os, const std::vector<T>& vec);
+
+template <typename T>
 std::ostream& operator << (std::ostream& os, const std::vector<std::vector<T>>& matrix);
 
 class Constraint
@@ -24,7 +27,10 @@ private:
 	/*
 	2D vector of double pairs storing intersection points once they are determined.
 	*/
-	std::vector<double[2]> xions;
+	std::vector<std::vector<double>> xions;
+	std::vector<std::vector<double>> yIncps;
+	std::vector<std::vector<double>> xIncps;
+	std::vector<std::vector<double>> cPoints;
 	
 
 public:
@@ -35,7 +41,9 @@ public:
 
 	int getNumCols();
 
-	std::vector<double[2]> getXions();
+	std::vector<std::vector<double>> getXions();
+	std::vector<std::vector<double>> getXIncps();
+	std::vector<std::vector<double>> getYIncps();
 
 	void setVal(int i, int j, double n);
 
@@ -48,12 +56,11 @@ public:
 
 	void printConstraint();
 
-	std::vector<double> xIntercepts();
+	void xAndYIntercepts();
 
-	std::vector<double> yIntercepts();
+	std::vector<std::vector<double>> findIntersections();
+	std::vector<std::vector<double>> idFeasibles();
 
-	std::vector<std::vector<double>> intersections();
-
-	double findOptimal();
+	void findOptimal(std::vector<double> obj);
 };
 
